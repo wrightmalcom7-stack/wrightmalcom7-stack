@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tasir Scripts - In Beta</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #333;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .beta-tag {
+      background-color: #ff8800;
+      color: black;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-left: 1rem;
+    }
+    .btn {
+      background-color: #ff4500;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-left: 1rem;
+    }
+    .btn:hover {
+      background-color: #e03e00;
+    }
+    main {
+      margin-top: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .script-preview {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #222;
+      border: 1px solid #333;
+      border-radius: 8px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    footer {
+      margin-top: 3rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    /* Tasks Section */
+    #tasks-section {
+      display: none;
+      max-width: 600px;
+      margin: 2rem auto;
+      text-align: left;
+    }
+    .task {
+      background-color: #222;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    .task.done {
+      background-color: #004400;
+      border-color: #00ff00;
+    }
+    .task button {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      margin-top: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .task button:disabled {
+      background-color: #0077aa;
+      cursor: not-allowed;
+    }
+    #reveal {
+      display: none;
+      margin-top: 2rem;
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    #back-btn {
+      margin-top: 1rem;
+      background: none;
+      border: none;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+    }
+    #back-btn:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      Tasir Scripts <span class="beta-tag">🚧 In Beta</span>
+    </div>
+    <div>
+      <button class="btn" onclick="window.location.href='https://your-payment-link.com'">Buy Premium Key</button>
+      <button class="btn" id="getKeyBtn">Get Key</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="main-content">
+      <h1>Welcome to Tasir Scripts</h1>
+      <p>Get premium scripts and GUIs. Secure. Fast. Clean.</p>
+
+      <div class="script-preview">
+        <h2>Featured Script</h2>
+        <p>Rayfield GUI | Auto Farm | Anti-AFK | Key Required</p>
+        <button class="btn" onclick="alert('Please use the Get Key button above.')">Get Script</button>
+      </div>
+    </div>
+
+    <section id="tasks-section">
+      <h1>Complete All Tasks to Unlock the Key</h1>
+      <p>You must stay on each site for 30 seconds to complete the task.</p>
+
+      <div class="task" id="task1">
+        <h3>Task 1: Visit Website</h3>
+        <button onclick="startTimer('task1', 'https://example.com')">Start Task</button>
+      </div>
+
+      <div class="task" id="task2">
+        <h3>Task 2: Visit Article</h3>
+        <button onclick="startTimer('task2', 'https://example.org')">Start Task</button>
+      </div>
+
+      <div class="task" id="task3">
+        <h3>Task 3: Visit Blog</h3>
+        <button onclick="startTimer('task3', 'https://example.net')">Start Task</button>
+      </div>
+
+      <button id="reveal" onclick="alert('Your Key: TASIR-KEY-2025')">✅ Reveal Key</button>
+      <br/>
+      <button id="back-btn" onclick="showMain()">← Back to Home</button>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Tasir Scripts. All rights reserved.
+  </footer>
+
+  <script>
+    const getKeyBtn = document.getElementById('getKeyBtn');
+    const mainContent = document.getElementById('main-content');
+    const tasksSection = document.getElementById('tasks-section');
+    const revealBtn = document.getElementById('reveal');
+
+    let completed = {
+      task1: false,
+      task2: false,
+      task3: false
+    };
+
+    getKeyBtn.addEventListener('click', () => {
+      mainContent.style.display = 'none';
+      tasksSection.style.display = 'block';
+      window.scrollTo(0, 0);
+    });
+
+    function showMain() {
+      tasksSection.style.display = 'none';
+      mainContent.style.display = 'block';
+      revealBtn.style.display = 'none';
+      completed = { task1: false, task2: false, task3: false };
+      // Reset buttons
+      ['task1', 'task2', 'task3'].forEach(taskId => {
+        const task = document.getElementById(taskId);
+        task.classList.remove('done');
+        const btn = task.querySelector('button');
+        btn.disabled = false;
+        btn.innerText = "Start Task";
+        task.querySelector('h3').innerText = task.querySelector('h3').innerText.replace(' ✅ Unlocked', '');
+      });
+    }
+
+    function startTimer(taskId, url) {
+      window.open(url, '_blank');
+      const btn = document.querySelector(`#${taskId} button`);
+      btn.disabled = true;
+      btn.innerText = "⏳ Please wait 30s...";
+
+      setTimeout(() => {
+        const task = document.getElementById(taskId);
+        task.classList.add('done');
+        const h3 = task.querySelector('h3');
+        if (!h3.innerText.includes('✅ Unlocked')) {
+          h3.innerText += " ✅ Unlocked";
+        }
+        completed[taskId] = true;
+        checkAllDone();
+      }, 30000);
+    }
+
+    function checkAllDone() {
+      if (completed.task1 && completed.task2 && completed.task3) {
+        revealBtn.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
